@@ -16,18 +16,19 @@ public class Task1Brackets {
     for (int i = 0; i < brackets.length(); ++i) {
       char c = brackets.charAt(i);
       switch (c) {
-        case '(', '{', '[', '<' -> openedBrackets.offerLast(c);
-        case ')', '}', ']', '>' -> {
+        case '(', '{', '[', '<': {
+          openedBrackets.offerLast(c);
+          break;
+        }
+        case ')', '}', ']', '>': {
           Character opened = openedBrackets.pollLast();
           if (opened == null ||
-              c == ')' && opened != '(' ||
-              c == '}' && opened != '{' ||
-              c == ']' && opened != '[' ||
-              c == '>' && opened != '<') {
+              c == ')' && opened.equals('(') ||
+              c == '}' && opened.equals('{') ||
+              c == ']' && opened.equals('[') ||
+              c == '>' && opened.equals('<')) {
             return false;
           }
-        }
-        default -> {
         }
       }
     }
