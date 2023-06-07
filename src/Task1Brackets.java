@@ -1,8 +1,18 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Task1Brackets {
+
+  private static final Map<Character, Character> bracketsMap = new HashMap<>();
+  static {
+    bracketsMap.put(')', '(');
+    bracketsMap.put('}', '{');
+    bracketsMap.put(']', '[');
+    bracketsMap.put('>', '<');
+  }
 
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
@@ -22,11 +32,7 @@ public class Task1Brackets {
         }
         case ')', '}', ']', '>': {
           Character opened = openedBrackets.pollLast();
-          if (opened == null ||
-              c == ')' && opened.equals('(') ||
-              c == '}' && opened.equals('{') ||
-              c == ']' && opened.equals('[') ||
-              c == '>' && opened.equals('<')) {
+          if (opened == null || !opened.equals(bracketsMap.get(c))) {
             return false;
           }
         }
